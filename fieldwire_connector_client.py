@@ -3,14 +3,14 @@ from __future__ import annotations
 import httpx
 from typing import Any, Optional
 
-DEFAULT_BASE = "https://api.fieldwire.com/api/v3"
+DEFAULT_BASE = "https://app.fieldwire.com/api/v3"
 
 class FieldwireClient:
     def __init__(self, api_token: str, base_url: str = ""):
         self.api_token = api_token.strip()
         self.base_url = (base_url.strip() if base_url else DEFAULT_BASE).rstrip("/")
         self.headers = {
-            "Authorization": f"Bearer {self.api_token}" if "Authorization" == "Authorization" else self.api_token,
+            "Fieldwire-API-Key": self.api_token, "Authorization": f"Fieldwire-API-Key {self.api_token}",
             "Content-Type": "application/json",
             "User-Agent": "Imperal-Fieldwire-Connector/1.0.0"
         }
